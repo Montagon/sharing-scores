@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     implementation(libs.bundles.arrow)
+    implementation(libs.bundles.google)
     implementation(libs.bundles.ktor.client)
     implementation(libs.bundles.ktor.server)
     implementation(libs.ktor.http)

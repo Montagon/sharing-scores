@@ -5,11 +5,17 @@ ktor = "2.3.6"
 logback = "1.4.11"
 spotless = "6.22.0"
 suspendApp = "0.4.0"
+google = "2.0.0"
+google-auth = "1.34.1"
+google-drive = "v3-rev20220815-2.0.0"
 
 [libraries]
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
 arrow-continuations = { module = "io.arrow-kt:arrow-continuations", version.ref = "arrow" }
 arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
+google-api-client = { module = "com.google.api-client:google-api-client", version.ref = "google" }
+google-oauth-client = { module = "com.google.oauth-client:google-oauth-client-jetty", version.ref = "google-auth" }
+google-drive = { module = "com.google.apis:google-api-services-drive", version.ref = "google-drive" }
 ktor-utils = { module = "io.ktor:ktor-utils", version.ref = "ktor" }
 ktor-http = { module = "io.ktor:ktor-http", version.ref = "ktor" }
 ktor-client ={ module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -32,6 +38,18 @@ suspendApp-core = { module = "io.arrow-kt:suspendapp", version.ref = "suspendApp
 suspendApp-ktor = { module = "io.arrow-kt:suspendapp-ktor", version.ref = "suspendApp" }
 
 [bundles]
+arrow = [
+    "arrow-core",
+    "arrow-fx-coroutines",
+    "arrow-continuations",
+    "suspendApp-core",
+    "suspendApp-ktor"
+]
+google = [
+    "google-api-client",
+    "google-oauth-client",
+    "google-drive"
+]
 ktor-client = [
     "ktor-client",
     "ktor-client-auth",
@@ -50,13 +68,6 @@ ktor-server = [
     "ktor-server-request-validation",
     "ktor-server-resources",
     "ktor-server-status-pages"
-]
-arrow = [
-    "arrow-core",
-    "arrow-fx-coroutines",
-    "arrow-continuations",
-    "suspendApp-core",
-    "suspendApp-ktor"
 ]
 
 [plugins]

@@ -12,7 +12,7 @@ A score is composed by:
   
 ## Setup
 
-### Dropbox API
+### Google Cloud API
 
 This project uses the [Google Cloud API for Java]([https://www.dropbox.com/developers/documentation/python](https://developers.google.com/drive/api/guides/about-sdk?hl=es-419)). 
 You will need to create an application and setup the following environments variables:

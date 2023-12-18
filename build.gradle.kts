@@ -1,4 +1,5 @@
 plugins {
+    application
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.spotless)
@@ -13,8 +14,10 @@ repositories {
 
 dependencies {
     implementation(libs.bundles.arrow)
+    implementation(libs.bundles.google)
     implementation(libs.bundles.ktor.client)
     implementation(libs.bundles.ktor.server)
+//    implementation(libs.bundles.tegral)
     implementation(libs.ktor.http)
     implementation(libs.ktor.utils)
     implementation(libs.logback)

@@ -1,4 +1,5 @@
 plugins {
+    application
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.spotless)
@@ -13,8 +14,10 @@ repositories {
 
 dependencies {
     implementation(libs.bundles.arrow)
+    implementation(libs.bundles.google)
     implementation(libs.bundles.ktor.client)
     implementation(libs.bundles.ktor.server)
+//    implementation(libs.bundles.tegral)
     implementation(libs.ktor.http)
     implementation(libs.ktor.utils)
     implementation(libs.logback)
@@ -33,12 +36,4 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(20)
-}
-
-task<JavaExec>("score-sharing") {
-    dependsOn("compileKotlin")
-    group = "Execution"
-    description = "Runs the sharing scores app"
-    classpath = sourceSets.main.get().runtimeClasspath
-    mainClass.set("org.jcma.sharingscores.SharingScoresServer")
 }

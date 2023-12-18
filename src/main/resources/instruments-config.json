@@ -1,0 +1,42 @@
+[
+  {
+    "name": "(G|g)ui(o|ó)n",
+    "restrict-level": "director",
+    "publishName": "Director"
+  },
+  {
+    "name": "(F|f)lauta|(O|o)boe",
+    "restrict-level": "oboe-y-flauta",
+    "publishName": "Flauta y Oboe"
+  },
+  {
+    "name": "(F|f)agot",
+    "restrict-level": "fagot",
+    "publishName": "Fagot"
+  },
+  {
+    "name": "(C|c)larinete",
+    "restrict-level": "clarinete",
+    "publishName": "Clarinete"
+  },
+  {
+    "name": "(S|s)axof(ó|o)n",
+    "restrict-level": "saxofon",
+    "publishName": "Saxofon"
+  },
+  {
+    "name": "(M|m)etales",
+    "restrict-level": "metales",
+    "publishName": "Metales"
+  },
+  {
+    "name": "percusi(ó|o)n",
+    "restrict-level": "percusion",
+    "publishName": "Percusion"
+  },
+  {
+    "name": "cuerda",
+    "restrict-level": "cuerdas",
+    "publishName": "Cuerdas"
+  }
+]

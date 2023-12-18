@@ -1,4 +1,4 @@
-# Sharing Scores with Dropbox
+# Sharing Scores with Google Drive
 
 The aim of this project is to have a tool to automatize the process of generating an HTML code containing a music score, just ready to be shared in Wordpress.
 

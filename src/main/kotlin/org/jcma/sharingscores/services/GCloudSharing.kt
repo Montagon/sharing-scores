@@ -6,6 +6,7 @@ import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
+import com.google.api.client.http.FileContent
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.JsonFactory
 import com.google.api.client.json.gson.GsonFactory
@@ -13,6 +14,8 @@ import com.google.api.client.util.store.FileDataStoreFactory
 import com.google.api.services.drive.Drive
 import com.google.api.services.drive.DriveScopes
 import com.google.api.services.drive.model.Permission
+import org.jcma.sharingscores.models.GCloudFiles
+import org.jcma.sharingscores.models.Score
 import java.io.File
 
 class GCloudSharing(
@@ -23,7 +26,7 @@ class GCloudSharing(
         .setType("anyone")
         .setRole("reader")
 
-    override fun getFilesInFolder(folderUrl: String): List<String> {
+    override fun getFilesInFolder(folderUrl: String): List<GCloudFiles> {
         val folderId = extractFolderIdFromDriveLink(folderUrl)
         val files = try {
             service.files().list()
@@ -36,8 +39,28 @@ class GCloudSharing(
             emptyList()
         }
         return files.mapNotNull { file ->
-            file.webViewLink
+            GCloudFiles(
+                id = file.id,
+                name = file.name,
+                webViewLink = file.webViewLink
+            )
         }
+    }
+
+    fun createFile(content: Score, parentId: String) {
+        val fileMetadata = com.google.api.services.drive.model.File()
+        fileMetadata.name = content.name // "MyReport.txt"
+        fileMetadata.parents = listOf(parentId)
+
+        // Create a temporary file and write some data to it
+        val tempFile = java.io.File.createTempFile(content.name, ".txt")
+        tempFile.writeText(content.blocks.joinToString(separator = "\n") { it.toString() })
+
+        val mediaContent = FileContent("text/plain", tempFile)
+
+        service.files().create(fileMetadata, mediaContent)
+            .setFields("id")
+            .execute()
     }
 
     override fun shareFile(fileUrl: String): Boolean {
@@ -50,7 +73,7 @@ class GCloudSharing(
         }
     }
 
-    private fun extractFolderIdFromDriveLink(driveLink: String): String? {
+    fun extractFolderIdFromDriveLink(driveLink: String): String? {
         // Define a regular expression pattern to extract the folder ID
         val pattern = if(driveLink.contains("folders")) {
             Regex("/folders/([\\w-]+)")

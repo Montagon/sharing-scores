@@ -34,3 +34,11 @@ tasks.test {
 kotlin {
     jvmToolchain(20)
 }
+
+task<JavaExec>("score-sharing") {
+    dependsOn("compileKotlin")
+    group = "Execution"
+    description = "Runs the sharing scores app"
+    classpath = sourceSets.main.get().runtimeClasspath
+    mainClass.set("org.jcma.sharingscores.SharingScoresServer")
+}

@@ -37,7 +37,6 @@ ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", versio
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 suspendApp-core = { module = "io.arrow-kt:suspendapp", version.ref = "suspendApp" }
 suspendApp-ktor = { module = "io.arrow-kt:suspendapp-ktor", version.ref = "suspendApp" }
-tegral-catalog = { module = "guru.zoroark.tegral:tegral-catalog", version.ref = "tegral" }
 tegral-core = { module = "guru.zoroark.tegral:tegral-core", version.ref = "tegral" }
 tegral-openapi-dsl = { module = "guru.zoroark.tegral:tegral-openapi-dsl", version.ref = "tegral" }
 tegral-openapi-scriptdef = { module = "guru.zoroark.tegral:tegral-openapi-scriptdef", version.ref = "tegral" }
@@ -78,7 +77,6 @@ ktor-server = [
     "ktor-server-status-pages"
 ]
 tegral = [
-    "tegral-catalog",
     "tegral-core",
     "tegral-openapi-dsl",
     "tegral-openapi-scriptdef",

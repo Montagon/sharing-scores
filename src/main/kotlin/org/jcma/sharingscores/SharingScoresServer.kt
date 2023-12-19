@@ -3,6 +3,8 @@ package org.jcma.sharingscores
 import arrow.continuations.SuspendApp
 import arrow.continuations.ktor.server
 import arrow.fx.coroutines.resourceScope
+import guru.zoroark.tegral.openapi.ktor.TegralOpenApiKtor
+import guru.zoroark.tegral.openapi.ktorui.TegralSwaggerUiKtor
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -48,12 +50,12 @@ object SharingScoresServer {
         }
         install(ContentNegotiation) { json() }
         install(Resources)
-        //                install(TegralOpenApiKtor) {
-        //                    title = "Brain AI"
-        //                    description = "Cortex AI Assistant"
-        //                    version = "0.0.1"
-        //                }
-        //                install(TegralSwaggerUiKtor)
+        install(TegralOpenApiKtor) {
+          title = "Sharing Scores"
+          description = "Sharing Scores application"
+          version = "0.0.1"
+        }
+        install(TegralSwaggerUiKtor)
         routing { score(scoreManagement) }
       }
       awaitCancellation()

@@ -17,7 +17,7 @@ dependencies {
     implementation(libs.bundles.google)
     implementation(libs.bundles.ktor.client)
     implementation(libs.bundles.ktor.server)
-//    implementation(libs.bundles.tegral)
+    implementation(libs.bundles.tegral)
     implementation(libs.ktor.http)
     implementation(libs.ktor.utils)
     implementation(libs.logback)
@@ -35,7 +35,7 @@ tasks.test {
     useJUnitPlatform()
 }
 kotlin {
-    jvmToolchain(20)
+    jvmToolchain(17)
 }
 
 task<JavaExec>("sharing-scores") {

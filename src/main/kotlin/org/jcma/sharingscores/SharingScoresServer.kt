@@ -20,45 +20,43 @@ import org.jcma.sharingscores.services.ScoreManagement
 
 object SharingScoresServer {
 
-    @JvmStatic
-    fun main(args: Array<String>) = SuspendApp {
-        resourceScope {
-            val env = Environment.loadEnvironment()
+  @JvmStatic
+  fun main(args: Array<String>) = SuspendApp {
+    resourceScope {
+      val env = Environment.loadEnvironment()
 
-            val gCloudSharing = GCloudSharing.create(
-                env.googleCloud.tokensDirectoryPath,
-                env.googleCloud.clientId,
-                env.googleCloud.authUri,
-                env.googleCloud.tokenUri,
-                env.googleCloud.clientSecret
-            )
+      val gCloudSharing =
+        GCloudSharing.create(
+          env.googleCloud.tokensDirectoryPath,
+          env.googleCloud.clientId,
+          env.googleCloud.authUri,
+          env.googleCloud.tokenUri,
+          env.googleCloud.clientSecret
+        )
 
-            // Read the instruments from resources
-            val instruments = Instrument.load()
+      // Read the instruments from resources
+      val instruments = Instrument.load()
 
-            val scoreManagement = ScoreManagement(gCloudSharing, instruments)
+      val scoreManagement = ScoreManagement(gCloudSharing, instruments)
 
-
-            server(factory = Netty, port = 8080, host = "0.0.0.0") {
-                install(CORS) {
-                    allowNonSimpleContentTypes = true
-                    HttpMethod.DefaultMethods.forEach { allowMethod(it) }
-                    allowHeaders { true }
-                    anyHost()
-                }
-                install(ContentNegotiation) { json() }
-                install(Resources)
-//                install(TegralOpenApiKtor) {
-//                    title = "Brain AI"
-//                    description = "Cortex AI Assistant"
-//                    version = "0.0.1"
-//                }
-//                install(TegralSwaggerUiKtor)
-                routing {
-                    score(scoreManagement)
-                }
-            }
-            awaitCancellation()
+      server(factory = Netty, port = 8080, host = "0.0.0.0") {
+        install(CORS) {
+          allowNonSimpleContentTypes = true
+          HttpMethod.DefaultMethods.forEach { allowMethod(it) }
+          allowHeaders { true }
+          anyHost()
         }
+        install(ContentNegotiation) { json() }
+        install(Resources)
+        //                install(TegralOpenApiKtor) {
+        //                    title = "Brain AI"
+        //                    description = "Cortex AI Assistant"
+        //                    version = "0.0.1"
+        //                }
+        //                install(TegralSwaggerUiKtor)
+        routing { score(scoreManagement) }
+      }
+      awaitCancellation()
     }
+  }
 }

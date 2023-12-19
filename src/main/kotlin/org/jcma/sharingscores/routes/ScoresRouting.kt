@@ -5,25 +5,25 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.jcma.sharingscores.models.SharingScoresRequest
 import org.jcma.sharingscores.models.EmptyInput
 import org.jcma.sharingscores.models.ScoreResponse
+import org.jcma.sharingscores.models.SharingScoresRequest
 import org.jcma.sharingscores.services.ScoreManagement
 
 fun Routing.score(scoreManagement: ScoreManagement) {
-    post("/sharing-score") { _ ->
-        recover({
-            val request = call.receiveNullable<SharingScoresRequest>() ?: raise(EmptyInput)
-            val score = scoreManagement.shareScore(request.input)
-            call.respond(ScoreResponse(score.blocks.joinToString(separator = "\n") { it.toString() }))
-        }) {
-            handleCqlError(it)
-        }
+  post("/sharing-score") { _ ->
+    recover({
+      val request = call.receiveNullable<SharingScoresRequest>() ?: raise(EmptyInput)
+      val score = scoreManagement.shareScore(request.input)
+      call.respond(ScoreResponse(score.blocks.joinToString(separator = "\n") { it.toString() }))
+    }) {
+      handleCqlError(it)
     }
+  }
 }
 
-//@Resource("/sharingscore")
-//class ScoreRoute {
+// @Resource("/sharingscore")
+// class ScoreRoute {
 //    companion object :
 //        ResourceDescription by describeResource({
 //            summary = "Score sharing application"
@@ -58,4 +58,4 @@ fun Routing.score(scoreManagement: ScoreManagement) {
 //                HttpStatusCode.ServiceUnavailable.value response {}
 //            }
 //        })
-//}
+// }

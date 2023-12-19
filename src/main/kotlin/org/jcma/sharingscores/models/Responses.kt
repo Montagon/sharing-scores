@@ -4,5 +4,4 @@ import kotlinx.serialization.Serializable
 
 @Serializable data class ScoreResponse(val score: String)
 
-@Serializable
-data class CqlErrorResponse(val error: String, val logs: List<String> = emptyList())
+@Serializable data class CqlErrorResponse(val error: String, val logs: List<String> = emptyList())

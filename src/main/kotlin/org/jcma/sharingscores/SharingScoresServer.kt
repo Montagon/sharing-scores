@@ -4,7 +4,9 @@ import arrow.continuations.SuspendApp
 import arrow.continuations.ktor.server
 import arrow.fx.coroutines.resourceScope
 import guru.zoroark.tegral.openapi.ktor.TegralOpenApiKtor
+import guru.zoroark.tegral.openapi.ktor.openApiEndpoint
 import guru.zoroark.tegral.openapi.ktorui.TegralSwaggerUiKtor
+import guru.zoroark.tegral.openapi.ktorui.swaggerUiEndpoint
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -56,7 +58,11 @@ object SharingScoresServer {
           version = "0.0.1"
         }
         install(TegralSwaggerUiKtor)
-        routing { score(scoreManagement) }
+        routing {
+          openApiEndpoint("/openapi")
+          score(scoreManagement)
+          swaggerUiEndpoint(path = "/docs", openApiPath = "/openapi")
+        }
       }
       awaitCancellation()
     }

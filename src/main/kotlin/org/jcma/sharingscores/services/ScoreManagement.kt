@@ -11,9 +11,10 @@ class ScoreManagement(
   fun shareScore(scoreUrl: String, videoUrl: String?): Score {
     val gFiles = gCloudSharing.getFilesInFolder(scoreUrl)
     val parentId = gCloudSharing.extractFolderIdFromDriveLink(scoreUrl)!!
+    val name = gCloudSharing.getName(scoreUrl)
     val score =
       Score(
-        name = "Score",
+        name = name,
         blocks =
           instruments.map { instrument ->
             val regex = Regex(instrument.name)

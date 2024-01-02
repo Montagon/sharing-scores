@@ -45,7 +45,7 @@ class GCloudSharing(private val service: Drive) : Sharing {
 
   fun createFile(content: Score, parentId: String) {
     val fileMetadata = com.google.api.services.drive.model.File()
-    fileMetadata.name = content.name // "MyReport.txt"
+    fileMetadata.name = content.name + ".txt" // "MyReport.txt"
     fileMetadata.parents = listOf(parentId)
 
     // Create a temporary file and write some data to it
@@ -81,6 +81,11 @@ class GCloudSharing(private val service: Drive) : Sharing {
 
     // Check if a match was found and return the folder ID
     return matchResult?.groups?.get(1)?.value
+  }
+
+  fun getName(driveLink: String): String {
+    val folderId = extractFolderIdFromDriveLink(driveLink)
+    return service.files().get(folderId).setFields("name").execute().name
   }
 
   companion object {

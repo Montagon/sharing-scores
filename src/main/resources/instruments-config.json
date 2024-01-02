@@ -30,7 +30,7 @@
     "publishName": "Metales"
   },
   {
-    "name": "percusi(ó|o)n",
+    "name": "(P|p)ercusi(ó|o)n",
     "restrict-level": "percusion",
     "publishName": "Percusion"
   },

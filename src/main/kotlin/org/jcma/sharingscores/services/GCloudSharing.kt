@@ -49,8 +49,8 @@ class GCloudSharing(private val service: Drive) : Sharing {
     fileMetadata.parents = listOf(parentId)
 
     // Create a temporary file and write some data to it
-    val tempFile = java.io.File.createTempFile(content.name, ".txt")
-    tempFile.writeText(content.blocks.joinToString(separator = "\n") { it.toString() })
+    val tempFile = File.createTempFile(content.name, ".txt")
+    tempFile.writeText(content.toString())
 
     val mediaContent = FileContent("text/plain", tempFile)
 

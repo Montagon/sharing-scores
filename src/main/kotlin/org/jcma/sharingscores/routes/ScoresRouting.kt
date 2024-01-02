@@ -21,8 +21,8 @@ fun Routing.score(scoreManagement: ScoreManagement) {
   postD<ScoreRoute> { _ ->
     recover({
       val request = call.receiveNullable<SharingScoresRequest>() ?: raise(EmptyInput)
-      val score = scoreManagement.shareScore(request.input)
-      call.respond(ScoreResponse(score.blocks.joinToString(separator = "\n") { it.toString() }))
+      val score = scoreManagement.shareScore(request.input, request.videoUrl)
+      call.respond(ScoreResponse(score.toString()))
     }) {
       handleCqlError(it)
     }
@@ -44,7 +44,7 @@ class ScoreRoute {
           json {
             schema(
               typeOf<SharingScoresRequest>(),
-              SharingScoresRequest("The url of the score to share")
+              SharingScoresRequest("The url of the score to share", "The url of the video to share")
             )
           }
         }

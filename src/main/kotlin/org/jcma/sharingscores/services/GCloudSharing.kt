@@ -143,7 +143,7 @@ class GCloudSharing(private val service: Drive) : Sharing {
           .setDataStoreFactory(FileDataStoreFactory(File(tokensDirectoryPath)))
           .setAccessType("offline")
           .build()
-      val receiver = LocalServerReceiver.Builder().setPort(8888).build()
+      val receiver = LocalServerReceiver.Builder().setHost("sharing-scores.fly.dev").build()
       return AuthorizationCodeInstalledApp(flow, receiver).authorize("user")
     }
   }

@@ -35,7 +35,12 @@
     "publishName": "Percusion"
   },
   {
-    "name": "cuerda",
+    "name": "(P|p)iano",
+    "restrict-level": "piano",
+    "publishName": "Piano"
+  },
+  {
+    "name": "(C|c)uerda",
     "restrict-level": "cuerdas",
     "publishName": "Cuerdas"
   }
